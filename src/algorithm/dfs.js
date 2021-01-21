@@ -30,7 +30,6 @@ function search(board, visited, currentNode, end, nodeHistory) {
     nodeHistory.push(currentNode);
 
     if(currentNode.x == end.x && currentNode.y == end.y) {
-        console.log("path found");
         return nodeHistory;
     }
 

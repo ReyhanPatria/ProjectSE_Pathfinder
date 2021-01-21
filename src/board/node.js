@@ -29,13 +29,4 @@ export class Node {
        // Set node class as status
         nodeElement.className = this.status;
     }
-
-    // Code to run when node is clicked on
-    clickHandler() {
-        console.log(`${ this.id } ${ this.status }`);
-    }
-
-    dragHandler() {
-        
-    }
 }

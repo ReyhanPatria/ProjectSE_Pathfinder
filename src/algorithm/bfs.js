@@ -46,6 +46,10 @@ export function bfs(board) {
             }
 
             let nextNode = board.array[nextY][nextX];
+            if(nextNode.status == "wall") {
+                continue;
+            }
+
             nextNode.addParent(currentNode);
             nodeList.push(nextNode);
         }

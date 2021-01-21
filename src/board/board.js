@@ -40,8 +40,12 @@ export class Board {
         this.height = height;
         this.initilizeArray();
         this.createGrid();
+        this.addMouseDownHandler();
 
         this.currentState = Board.DEFAULT_STATE;
+
+        this.mouseDown = false;
+        this.selectedNode = null;
     }
 
     // Function to set board's state
@@ -162,12 +166,9 @@ export class Board {
         // Run path finding algorithm
         // Gets a list of visited nodes to animate
         let nodesToAnimate = this.findPath(algorithmCallback);
-        console.log(nodesToAnimate);
         
         // Loop for animating visited nodes
         let animationLoop = setInterval(function() {
-            console.log("animation");
-
             // Render current node in node list
             let currentNode = nodesToAnimate.shift();
             currentNode.render();
@@ -205,6 +206,89 @@ export class Board {
         for(let y = 0; y < this.height; y++) {
             for(let x = 0; x < this.width; x++) {
                 this.array[y][x].render();
+            }
+        }
+    }
+
+    // Add mouse down handlers
+    addMouseDownHandler() {
+        for(let y = 0; y < this.height; y++) {
+            for(let x = 0; x < this.width; x++) {
+                let nodeObject = this.array[y][x];
+                let nodeElement = document.getElementById(nodeObject.id);
+
+                // Define function to run on mouse down on node
+                nodeElement.onmousedown = function(e) {
+                    e.preventDefault();
+
+                    if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
+                        return;
+                    }
+
+                    Board.getInstance().mouseDown = true;
+                    Board.getInstance().selectedNode = nodeObject;
+
+                    if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {
+                        nodeObject.status = (nodeObject.status == "wall") ? "unvisited" : "wall";
+                        nodeObject.render();
+                    }
+                }
+
+                // Define function to run on mouse enter node
+                nodeElement.onmouseenter = function(e) {
+                    e.preventDefault();
+
+                    if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
+                        return;
+                    }
+
+                    if(Board.getInstance().mouseDown == true && Board.getInstance().selectedNode != null) {
+                        switch(Board.getInstance().selectedNode.status) {
+                            case "startNode":
+                                if(nodeObject.status != "endNode") {
+                                    Board.getInstance().setStartNodeLocation(nodeObject.x, nodeObject.y);
+                                    nodeObject.render();
+
+                                    Board.getInstance().selectedNode.status = "unvisited";
+                                    Board.getInstance().selectedNode.render();
+
+                                    Board.getInstance().selectedNode = nodeObject;
+                                }
+                                break;
+
+                            case "endNode":
+                                if(nodeObject.status != "startNode") {
+                                    Board.getInstance().setEndNodeLocation(nodeObject.x, nodeObject.y);
+                                    nodeObject.render();
+                                
+                                    Board.getInstance().selectedNode.status = "unvisited";
+                                    Board.getInstance().selectedNode.render();
+
+                                    Board.getInstance().selectedNode = nodeObject;
+                                }
+                                break;
+
+                            default:
+                                if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {
+                                    nodeObject = nodeObject;
+                                    nodeObject.status = (nodeObject.status == "wall") ? "unvisited" : "wall";
+                                    nodeObject.render();
+                                }
+                                break;
+                        }
+                    }
+                }
+
+                // Define function to run on mouse up
+                nodeElement.onmouseup = function(e) {
+                    e.preventDefault();
+
+                    if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
+                        return;
+                    }
+
+                    Board.getInstance().mouseDown = false;
+                }
             }
         }
     }
