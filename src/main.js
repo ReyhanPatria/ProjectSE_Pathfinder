@@ -5,8 +5,8 @@ import { dfs } from "./algorithm/dfs.js";
 // Define board properties
 let width = 50;
 let height = 25;
-let defaultEnd = {x: 4, y: 12};
-let defaultStart = {x: 45, y: 12};
+let defaultStart = {x: 4, y: 12};
+let defaultEnd = {x: 45, y: 12};
 
 // Create board instance
 Board.createInstance(width, height);

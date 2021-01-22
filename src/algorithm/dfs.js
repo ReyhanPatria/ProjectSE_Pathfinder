@@ -52,6 +52,10 @@ function search(board, visited, currentNode, end, nodeHistory) {
         }
 
         let nextNode = board.array[nextY][nextX];
+        if(nextNode.status == "wall") {
+            continue;
+        }
+
         nextNode.addParent(currentNode);
         let path = search(board, visited, nextNode, end, nodeHistory);
         if(path != null) {
