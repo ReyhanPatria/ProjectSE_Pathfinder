@@ -56,7 +56,7 @@ function search(board, visited, currentNode, end, nodeHistory) {
             continue;
         }
 
-        nextNode.addParent(currentNode);
+        nextNode.setParent(currentNode);
         let path = search(board, visited, nextNode, end, nodeHistory);
         if(path != null) {
             return path;

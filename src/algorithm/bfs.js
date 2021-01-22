@@ -50,7 +50,7 @@ export function bfs(board) {
                 continue;
             }
 
-            nextNode.addParent(currentNode);
+            nextNode.setParent(currentNode);
             nodeList.push(nextNode);
         }
     }

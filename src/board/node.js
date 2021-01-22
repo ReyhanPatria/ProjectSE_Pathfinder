@@ -20,13 +20,13 @@ export class Node {
     getDistance(otherNode) {
         let xDistance = Math.pow(this.x - otherNode.x, 2);
         let yDistance = Math.pow(this.y - otherNode.y, 2);
-        let distance = Math.pow(xDistance + yDistance, 1/2);
+        let distance = Math.pow(xDistance + yDistance, 0.5);
 
         return distance;
     }
 
     // Adds a parent attribute to node
-    addParent(parentNode) {
+    setParent(parentNode) {
         this.parent = parentNode;
     }
 
