@@ -89,7 +89,7 @@ export class Board {
             for(let j = 0; j < this.width; j++) {
                 let nodeObject = this.array[i][j];
                 // Reset node's parent
-                nodeObject.parent = null;
+                nodeObject.reset();
 
                 // Change all visited and path nodes to unvisited
                 if(nodeObject.status == "visited" || nodeObject.status == "pathNode") {
@@ -115,7 +115,8 @@ export class Board {
             for(let j = 0; j < this.width; j++) {
                 let nodeObject = this.array[i][j];
                 // Reset node's parent
-                nodeObject.parent = null;
+                nodeObject.reset();
+                
 
                 // Change all nodes except for start and end node to unvisited node
                 if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {

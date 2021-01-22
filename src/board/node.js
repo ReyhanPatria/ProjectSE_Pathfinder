@@ -6,14 +6,21 @@ export class Node {
         this.cost = cost;
         this.id = "node";
         this.status = "unvisited";
+
         this.parent = null;
+        this.g = Number.MAX_SAFE_INTEGER;
+    }
+
+    reset() {
+        this.parent = null;
+        this.g = Number.MAX_SAFE_INTEGER;
     }
 
     // Get the euclidean distance between 2 nodes
     getDistance(otherNode) {
         let xDistance = Math.pow(this.x - otherNode.x, 2);
         let yDistance = Math.pow(this.y - otherNode.y, 2);
-        let distance = Math.pow(xDistance + yDistance, 1 / 2);
+        let distance = Math.pow(xDistance + yDistance, 1/2);
 
         return distance;
     }
