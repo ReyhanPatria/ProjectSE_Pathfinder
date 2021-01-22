@@ -1,6 +1,7 @@
 import { Board } from "./board/board.js";
 import { bfs } from "./algorithm/bfs.js";
 import { dfs } from "./algorithm/dfs.js";
+import { aStar } from "./algorithm/aStar.js";
 
 // Create board instance
 Board.createInstance(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
@@ -48,6 +49,10 @@ algorithmComboBox.onchange = function() {
 
         case "dfs":
             algorithm = dfs;
+            break;
+
+        case "a-star":
+            algorithm = aStar;
             break;
         
         default:
