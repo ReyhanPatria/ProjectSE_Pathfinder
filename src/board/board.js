@@ -245,7 +245,7 @@ export class Board {
                     if(Board.getInstance().mouseDown == true && Board.getInstance().selectedNode != null) {
                         switch(Board.getInstance().selectedNode.status) {
                             case "startNode":
-                                if(nodeObject.status != "endNode") {
+                                if(nodeObject.status != "startNode" && nodeObject.status != "endNode" ) {
                                     Board.getInstance().setStartNodeLocation(nodeObject.x, nodeObject.y);
                                     nodeObject.render();
 
@@ -257,7 +257,7 @@ export class Board {
                                 break;
 
                             case "endNode":
-                                if(nodeObject.status != "startNode") {
+                                if(nodeObject.status != "startNode" && nodeObject.status != "endNode" ) {
                                     Board.getInstance().setEndNodeLocation(nodeObject.x, nodeObject.y);
                                     nodeObject.render();
                                 
