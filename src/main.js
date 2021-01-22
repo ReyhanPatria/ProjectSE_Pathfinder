@@ -2,18 +2,8 @@ import { Board } from "./board/board.js";
 import { bfs } from "./algorithm/bfs.js";
 import { dfs } from "./algorithm/dfs.js";
 
-// Define board properties
-let width = 50;
-let height = 25;
-let defaultStart = {x: 4, y: 12};
-let defaultEnd = {x: 45, y: 12};
-
 // Create board instance
-Board.createInstance(width, height);
-// Set starting node location
-Board.getInstance().setStartNodeLocation(defaultStart.x, defaultStart.y);
-// Set ending node location
-Board.getInstance().setEndNodeLocation(defaultEnd.x, defaultEnd.y);
+Board.createInstance(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
 // Render board onto the page
 Board.getInstance().render();
 
@@ -36,6 +26,16 @@ resetButton.onclick = function() {
     if(Board.getInstance().getState() != Board.ANIMATING_STATE) {
         Board.getInstance().reset();
     }
+}
+
+let clearWallButton = document.getElementById("clearWallButton");
+clearWallButton.onclick = function() {
+    Board.getInstance().clearWall();
+}
+
+let clearPathButton = document.getElementById("clearPathButton");
+clearPathButton.onclick = function() {
+    Board.getInstance().clearPath();
 }
 
 let algorithmComboBox = document.getElementById("algorithmOption");

@@ -6,6 +6,7 @@ export class Node {
         this.cost = cost;
         this.id = "node";
         this.status = "unvisited";
+        this.parent = null;
     }
 
     // Get the euclidean distance between 2 nodes

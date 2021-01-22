@@ -6,6 +6,12 @@ export class Board {
     static ANIMATING_STATE = 102;
     static POST_ANIMATING_STATE = 103;
 
+    // Constant variable of default values
+    static DEFAULT_WIDTH = 50;
+    static DEFAULT_HEIGHT = 25;
+    static DEFAULT_START = {x: 4, y: 12};
+    static DEFAULT_END = {x: 45, y: 12};
+
     // Instance of board
     static instance = null;
 
@@ -44,6 +50,8 @@ export class Board {
 
         this.currentState = Board.DEFAULT_STATE;
 
+        this.setStartNodeLocation(Board.DEFAULT_START.x, Board.DEFAULT_START.y);
+        this.setEndNodeLocation(Board.DEFAULT_END.x, Board.DEFAULT_END.y);
         this.mouseDown = false;
         this.selectedNode = null;
     }
@@ -66,9 +74,59 @@ export class Board {
         let endNode = this.endNode;
         
         Board.createInstance(width, height);
-        Board.getInstance().setStartNodeLocation(startNode.x, startNode.y);
-        Board.getInstance().setEndNodeLocation(endNode.x, endNode.y);
         Board.getInstance().render();
+    }
+
+    // Function to clear path on board
+    clearPath() {
+        // Check board state, if state is not post animating state then return
+        if(this.getState() != Board.POST_ANIMATING_STATE) {
+            return;
+        }
+
+        // Loop through all nodes
+        for(let i = 0; i < this.height; i++) {
+            for(let j = 0; j < this.width; j++) {
+                let nodeObject = this.array[i][j];
+                // Reset node's parent
+                nodeObject.parent = null;
+
+                // Change all visited and path nodes to unvisited
+                if(nodeObject.status == "visited" || nodeObject.status == "pathNode") {
+                    nodeObject.status = "unvisited";
+                    nodeObject.render();
+                }
+            }
+        }
+
+        // Change board state to default state
+        this.setState(Board.DEFAULT_STATE);
+    }
+
+    // Function to clear walls on board
+    clearWall() {
+        // Check board state, if state is animating state then return
+        if(this.getState() == Board.ANIMATING_STATE) {
+            return;
+        }
+
+        // Loop through all nodes
+        for(let i = 0; i < this.height; i++) {
+            for(let j = 0; j < this.width; j++) {
+                let nodeObject = this.array[i][j];
+                // Reset node's parent
+                nodeObject.parent = null;
+
+                // Change all nodes except for start and end node to unvisited node
+                if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {
+                    nodeObject.status = "unvisited";
+                    nodeObject.render();
+                }
+            }
+        }
+
+        // Change board state to default state
+        this.setState(Board.DEFAULT_STATE);
     }
 
     // Set starting node location
@@ -219,8 +277,10 @@ export class Board {
 
                 // Define function to run on mouse down on node
                 nodeElement.onmousedown = function(e) {
+                    // Prevent default action of event
                     e.preventDefault();
 
+                    // Check state of board, if state is not default then return
                     if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
                         return;
                     }
@@ -228,7 +288,10 @@ export class Board {
                     Board.getInstance().mouseDown = true;
                     Board.getInstance().selectedNode = nodeObject;
 
+                    // Check if node isn't a start node and an end node
+                    // If true then turn the node into a wall node or unvisited node
                     if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {
+                        // Flip between wall or unvisited node
                         nodeObject.status = (nodeObject.status == "wall") ? "unvisited" : "wall";
                         nodeObject.render();
                     }
@@ -236,41 +299,51 @@ export class Board {
 
                 // Define function to run on mouse enter node
                 nodeElement.onmouseenter = function(e) {
+                    // Prevent default action of event
                     e.preventDefault();
 
+                    // Check state of board, if state is not default then return
                     if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
                         return;
                     }
 
+                    // Check if mouse button is down and there is a selected node
                     if(Board.getInstance().mouseDown == true && Board.getInstance().selectedNode != null) {
+                        // Check selected node status
                         switch(Board.getInstance().selectedNode.status) {
                             case "startNode":
                                 if(nodeObject.status != "startNode" && nodeObject.status != "endNode" ) {
+                                    // Set current node as starting node
                                     Board.getInstance().setStartNodeLocation(nodeObject.x, nodeObject.y);
                                     nodeObject.render();
 
+                                    // Set previously starting node to unvisited node
                                     Board.getInstance().selectedNode.status = "unvisited";
                                     Board.getInstance().selectedNode.render();
 
+                                    // Changed selected node to current node
                                     Board.getInstance().selectedNode = nodeObject;
                                 }
                                 break;
 
                             case "endNode":
                                 if(nodeObject.status != "startNode" && nodeObject.status != "endNode" ) {
+                                    // Set current node as ending node
                                     Board.getInstance().setEndNodeLocation(nodeObject.x, nodeObject.y);
                                     nodeObject.render();
                                 
+                                    // Set previously ending node to unvisited node
                                     Board.getInstance().selectedNode.status = "unvisited";
                                     Board.getInstance().selectedNode.render();
 
+                                    // Changed selected node to current node
                                     Board.getInstance().selectedNode = nodeObject;
                                 }
                                 break;
 
                             default:
                                 if(nodeObject.status != "startNode" && nodeObject.status != "endNode") {
-                                    nodeObject = nodeObject;
+                                    // Flip between wall or unvisited node
                                     nodeObject.status = (nodeObject.status == "wall") ? "unvisited" : "wall";
                                     nodeObject.render();
                                 }
@@ -281,12 +354,15 @@ export class Board {
 
                 // Define function to run on mouse up
                 nodeElement.onmouseup = function(e) {
+                    // Prevent default action of event
                     e.preventDefault();
 
+                    // Check state of board, if state is not default then return
                     if(Board.getInstance().getState() != Board.DEFAULT_STATE) {
                         return;
                     }
 
+                    // Set mout button boolean to false
                     Board.getInstance().mouseDown = false;
                 }
             }
