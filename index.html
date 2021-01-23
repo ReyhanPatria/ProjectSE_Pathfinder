@@ -22,6 +22,8 @@
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
 
     <!-- Temporary stylesheet -->
     <style>
@@ -36,63 +38,215 @@
             margin: auto;
             width: 1200px;
             height: 550px;
+            padding-bottom: 8px;
         }
 
         td.startNode {
-            background-color: aqua;
+            background-color: green;
+        }
+
+        .startNode {
+            background-color: green;
         }
 
         td.endNode {
             background-color: red;
         }
 
+        .endNode {
+            background-color: red;
+        }
+
         td.pathNode {
-            background-color: yellow;
+            background-color: #f5a31a;
+        }
+
+        .pathNode {
+            background-color: #f5a31a;
         }
 
         td.unvisited {
             background-color: white;
         }
+
+        .unvisited {
+            background-color: white;
+        }
         
         td.visited {
-            background-color: chartreuse;
+            background-color: #e9b0df;
+        }
+
+        .visited {
+            background-color: #e9b0df;
         }
 
         td.wall {
-            background-color: navy;
+            background-color: #1b262c;
+        }
+
+        .wall {
+            background-color: #1b262c;
+        }
+
+        .flex-row-justify-center {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        .nav-item {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .btn {
+            border: none;
+            font-size: 18px;
+            font-weight: normal;
+            line-height: 1.4;
+            border-radius: 4px;
+            padding: 10px 15px;
+        }
+
+        .navbar-btn:hover {
+            color: #54e346;
+        }
+
+        .navbar-btn {
+            color: rgb(255, 255, 255);
+            background-color: transparent;
+        }
+
+        .start-btn {
+            color: rgb(255, 255, 255);
+            background-color: #00b7c2;
+        }
+
+        select {
+            background-color: transparent;
+            color: rgb(255, 255, 255);
+            border-left-color: transparent;
+            border: none;
+            font-size: 18px;
+            font-weight: normal;
+            line-height: 1.4;
+            border-radius: 4px;
+            padding: 10px 15px;
+            -webkit-font-smoothing: subpixel-antialiased;
+            transition: border 0.25s linear 0s, color 0.25s linear 0s, background-color 0.25s linear 0s;
+        }
+    
+        option {
+            background-color: #153e90;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-family: Lato, Helvetica, Arial, sans-serif;
+            font-size: 18px;
+            line-height: 1.72222;
+        }
+
+        .navbar-brand {
+            font-size: xx-large;
+        }
+
+        #main-navbar {
+            padding: 18px 36px; 
+            background-color: #153e90;
+        }
+
+        #index-navbar > ul{
+            padding-top: 8px;
+            justify-content: center;
+        }
+
+        div.node-index {
+            align-self: center;
+            width: 32px; 
+            height: 32px; 
+            border: 2px solid; 
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div>
-        <!-- Table for board representation -->
         <div>
-            <button id="startButton">
-                Find Path!
-            </button>
+            <nav class="navbar navbar-expand-lg bg-light navbar-light flex-row-justify-center">
+                <h1 class="navbar-brand">
+                    Pathfinder
+                </h1>
+            </nav>
+            <nav class="navbar navbar-expand-lg navbar-dark flex-row-justify-center" id="main-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <button id="resetButton" class="btn navbar-btn">
+                            Reset Board
+                        </button>
+                    </li>
 
-            <button id="resetButton">
-                Reset Board
-            </button>
+                    <li class="nav-item">
+                        <button id="clearWallButton" class="btn navbar-btn">
+                            Clear Walls
+                        </button>
+                    </li>
 
-            <button id="clearWallButton">
-                Clear Walls
-            </button>
+                    <li class="nav-item">
+                        <button id="startButton" class="btn start-btn">
+                            Find Path!
+                        </button>
+                    </li>
 
-            <button id="clearPathButton">
-                Clear Path
-            </button>
+                    <li class="nav-item">
+                        <button id="clearPathButton" class="btn navbar-btn">
+                            Clear Path
+                        </button>
+                    </li>
+                </ul>
+                <div>
+                    <select id="algorithmOption">
+                        <option value="" selected disabled hidden>Choose Algorithm</option>
+                        <option value="bfs">Breadth First Search</option>
+                        <option value="dfs">Depth First Search</option>
+                        <option value="a-star">A* Algorithm</option>
+                    </select>
+                </div>
+            </nav>
+        </div>
 
-            <select id="algorithmOption">
-                <option value="" selected disabled hidden>Choose Algorithm</option>
-                <option value="bfs">Breadth First Search</option>
-                <option value="dfs">Depth First Search</option>
-                <option value="a-star">A* Algorithm</option>
-            </select>
+        <div class="flex-row-justify-center" id="index-navbar">
+            <ul class="nav navbar-nav flex-row-justify-center">
+                <li class="nav-item">
+                    <div class="node-index startNode"></div>
+                    Starting Node
+                </li>
+                <li class="nav-item">
+                    <div class="node-index endNode"></div>
+                    Ending Node
+                </li>
+                <li class="nav-item">
+                    <div class="node-index wall"></div>
+                    Wall Node
+                </li>
+                <li class="nav-item">
+                    <div class="node-index unvisited"></div>
+                    Unvisited Node
+                </li>
+                <li class="nav-item">
+                    <div class="node-index visited"></div>
+                    Visited Node
+                </li>
+                <li class="nav-item">
+                    <div class="node-index pathNode"></div>
+                    Path Node
+                </li>
+            </ul>
         </div>
 
         <div class="board-container">
-            <table class="table table-bordered" id="board"></table>
+            <table class="table table-bordered border border-5 border-dark" id="board"></table>
         </div>
     </div>
 </body>
