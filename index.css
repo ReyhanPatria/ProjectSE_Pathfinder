@@ -1,0 +1,142 @@
+.table {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.board-container {
+    margin: auto;
+    width: 1200px;
+    height: 550px;
+    padding-bottom: 8px;
+}
+
+td.startNode {
+    background-color: green;
+}
+
+.startNode {
+    background-color: green;
+}
+
+td.endNode {
+    background-color: red;
+}
+
+.endNode {
+    background-color: red;
+}
+
+td.pathNode {
+    background-color: #f5a31a;
+}
+
+.pathNode {
+    background-color: #f5a31a;
+}
+
+td.unvisited {
+    background-color: white;
+}
+
+.unvisited {
+    background-color: white;
+}
+
+td.visited {
+    background-color: #e9b0df;
+}
+
+.visited {
+    background-color: #e9b0df;
+}
+
+td.wall {
+    background-color: #1b262c;
+}
+
+.wall {
+    background-color: #1b262c;
+}
+
+.flex-row-justify-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-item {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.btn {
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.4;
+    border-radius: 4px;
+    padding: 10px 15px;
+}
+
+.navbar-btn:hover {
+    color: #54e346;
+}
+
+.navbar-btn {
+    color: rgb(255, 255, 255);
+    background-color: transparent;
+}
+
+.start-btn {
+    color: rgb(255, 255, 255);
+    background-color: #00b7c2;
+}
+
+select {
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border-left-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.4;
+    border-radius: 4px;
+    padding: 10px 15px;
+    -webkit-font-smoothing: subpixel-antialiased;
+    transition: border 0.25s linear 0s, color 0.25s linear 0s, background-color 0.25s linear 0s;
+}
+
+option {
+    background-color: #153e90;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-family: Lato, Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.72222;
+}
+
+.navbar-brand {
+    font-size: xx-large;
+}
+
+#main-navbar {
+    padding: 18px 36px; 
+    background-color: #153e90;
+}
+
+#index-navbar > ul{
+    padding-top: 8px;
+    justify-content: center;
+}
+
+div.node-index {
+    align-self: center;
+    width: 32px; 
+    height: 32px; 
+    border: 2px solid; 
+    display: inline-block;
+}

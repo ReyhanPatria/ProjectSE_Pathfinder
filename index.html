@@ -5,171 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-
     <!-- Title -->
     <title>Pathfinder</title>
     
-
     <!-- Scripts -->
-    <!-- JQuery for Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
     <!-- Main script -->
     <script type="module" src="src/main.js" defer="true"></script>
 
-
-    <!-- Bootstrap -->
+    <!-- Bootstrap and Styling-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="index.css" rel="stylesheet">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-
-    <!-- Temporary stylesheet -->
-    <style>
-        .table {
-            margin: auto;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        .board-container {
-            margin: auto;
-            width: 1200px;
-            height: 550px;
-            padding-bottom: 8px;
-        }
-
-        td.startNode {
-            background-color: green;
-        }
-
-        .startNode {
-            background-color: green;
-        }
-
-        td.endNode {
-            background-color: red;
-        }
-
-        .endNode {
-            background-color: red;
-        }
-
-        td.pathNode {
-            background-color: #f5a31a;
-        }
-
-        .pathNode {
-            background-color: #f5a31a;
-        }
-
-        td.unvisited {
-            background-color: white;
-        }
-
-        .unvisited {
-            background-color: white;
-        }
-        
-        td.visited {
-            background-color: #e9b0df;
-        }
-
-        .visited {
-            background-color: #e9b0df;
-        }
-
-        td.wall {
-            background-color: #1b262c;
-        }
-
-        .wall {
-            background-color: #1b262c;
-        }
-
-        .flex-row-justify-center {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-        }
-
-        .nav-item {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .btn {
-            border: none;
-            font-size: 18px;
-            font-weight: normal;
-            line-height: 1.4;
-            border-radius: 4px;
-            padding: 10px 15px;
-        }
-
-        .navbar-btn:hover {
-            color: #54e346;
-        }
-
-        .navbar-btn {
-            color: rgb(255, 255, 255);
-            background-color: transparent;
-        }
-
-        .start-btn {
-            color: rgb(255, 255, 255);
-            background-color: #00b7c2;
-        }
-
-        select {
-            background-color: transparent;
-            color: rgb(255, 255, 255);
-            border-left-color: transparent;
-            border: none;
-            font-size: 18px;
-            font-weight: normal;
-            line-height: 1.4;
-            border-radius: 4px;
-            padding: 10px 15px;
-            -webkit-font-smoothing: subpixel-antialiased;
-            transition: border 0.25s linear 0s, color 0.25s linear 0s, background-color 0.25s linear 0s;
-        }
-    
-        option {
-            background-color: #153e90;
-        }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            font-family: Lato, Helvetica, Arial, sans-serif;
-            font-size: 18px;
-            line-height: 1.72222;
-        }
-
-        .navbar-brand {
-            font-size: xx-large;
-        }
-
-        #main-navbar {
-            padding: 18px 36px; 
-            background-color: #153e90;
-        }
-
-        #index-navbar > ul{
-            padding-top: 8px;
-            justify-content: center;
-        }
-
-        div.node-index {
-            align-self: center;
-            width: 32px; 
-            height: 32px; 
-            border: 2px solid; 
-            display: inline-block;
-        }
-    </style>
 </head>
 <body>
     <div>
