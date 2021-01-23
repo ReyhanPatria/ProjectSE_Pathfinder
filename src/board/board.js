@@ -9,8 +9,8 @@ export class Board {
     // Constant variable of default values
     static DEFAULT_WIDTH = 50;
     static DEFAULT_HEIGHT = 25;
-    static DEFAULT_START = {x: 4, y: 12};
-    static DEFAULT_END = {x: 45, y: 12};
+    static DEFAULT_START = {x: 13, y: 12};
+    static DEFAULT_END = {x: 36, y: 12};
 
     // Instance of board
     static instance = null;
