@@ -13,8 +13,9 @@ export function dfs(board) {
     let end = board.endNode;
 
     let nodeHistory = []
+    nodeHistory.concat(search(board, visited, start, end, nodeHistory));
 
-    return search(board, visited, start, end, nodeHistory);
+    return nodeHistory;
 }
 
 function search(board, visited, currentNode, end, nodeHistory) {
