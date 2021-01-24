@@ -2,6 +2,7 @@ import { Board } from "./board/board.js";
 import { bfs } from "./algorithm/bfs.js";
 import { dfs } from "./algorithm/dfs.js";
 import { aStar } from "./algorithm/aStar.js";
+import { dijkstra } from "./algorithm/dijkstra.js";
 
 // Create board instance
 Board.createInstance(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
@@ -53,6 +54,10 @@ algorithmComboBox.onchange = function() {
 
         case "a-star":
             algorithm = aStar;
+            break;
+
+        case "dijkstra":
+            algorithm = dijkstra;
             break;
         
         default:
