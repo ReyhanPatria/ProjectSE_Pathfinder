@@ -262,6 +262,9 @@ export class Board {
 
                         // Set board state to post animation state
                         Board.getInstance().setState(Board.POST_ANIMATING_STATE);
+
+                        // Show alert when path is found
+                        window.alert("Path is found!");
                     }
                 }, 5);
             }
