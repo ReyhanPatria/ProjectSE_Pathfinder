@@ -44,7 +44,7 @@ export class Board {
     constructor(width, height) {
         this.width = width;
         this.height = height;
-        this.initilizeArray();
+        this.initializeArray();
         this.createGrid();
         this.addMouseDownHandler();
 
@@ -145,7 +145,7 @@ export class Board {
     }
 
     // Initialize board array
-    initilizeArray() {
+    initializeArray() {
         // Create a 2D array of Node objects
         this.array = new Array(this.height);
         for(let i = 0; i < this.height; i++) {
@@ -225,7 +225,7 @@ export class Board {
         // Run path finding algorithm
         // Gets a list of visited nodes to animate
         let nodesToAnimate = this.findPath(algorithmCallback);
-        
+
         // Loop for animating visited nodes
         let animationLoop = setInterval(function() {
             // Render current node in node list
