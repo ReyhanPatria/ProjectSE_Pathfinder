@@ -241,6 +241,11 @@ export class Board {
                 // Gets a list of path nodes to animate
                 nodesToAnimate = Board.getInstance().createPath();
 
+                // Show alert when no path is found
+                if(nodesToAnimate.length <= 1) {
+                    window.alert("No path is found!");
+                }
+
                 // Loop for animation path nodes
                 animationLoop = setInterval(function() {
                     // Render current node in node list
@@ -254,6 +259,9 @@ export class Board {
 
                         // Set board state to post animation state
                         Board.getInstance().setState(Board.POST_ANIMATING_STATE);
+
+                        // Show alert when path is found
+                        window.alert("Path is found!");
                     }
                 }, 5);
             }
