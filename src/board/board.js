@@ -241,9 +241,6 @@ export class Board {
                 // Gets a list of path nodes to animate
                 nodesToAnimate = Board.getInstance().createPath();
 
-                console.log(nodesToAnimate);
-                console.log(nodesToAnimate.length);
-
                 // Show alert when no path is found
                 if(nodesToAnimate.length <= 1) {
                     window.alert("No path is found!");
