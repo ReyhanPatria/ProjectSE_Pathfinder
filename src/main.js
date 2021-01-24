@@ -2,6 +2,7 @@ import { Board } from "./board/board.js";
 import { bfs } from "./algorithm/bfs.js";
 import { dfs } from "./algorithm/dfs.js";
 import { aStar } from "./algorithm/aStar.js";
+import { dijkstra } from "./algorithm/dijkstra.js";
 
 // Create board instance
 Board.createInstance(Board.DEFAULT_WIDTH, Board.DEFAULT_HEIGHT);
@@ -12,8 +13,9 @@ let algorithm = null;
 
 let startButton = document.getElementById("startButton");
 startButton.onclick = function() {
-    if(Board.getInstance().getState() == Board.DEFAULT_STATE) {
+    if(Board.getInstance().getState() != Board.ANIMATING_STATE) {
         if(algorithm != null) {
+            Board.getInstance().clearPath();
             Board.getInstance().animatePathFinding(algorithm);
         }
         else {
@@ -53,6 +55,10 @@ algorithmComboBox.onchange = function() {
 
         case "a-star":
             algorithm = aStar;
+            break;
+
+        case "dijkstra":
+            algorithm = dijkstra;
             break;
         
         default:
