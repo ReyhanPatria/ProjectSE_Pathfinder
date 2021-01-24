@@ -13,8 +13,9 @@ let algorithm = null;
 
 let startButton = document.getElementById("startButton");
 startButton.onclick = function() {
-    if(Board.getInstance().getState() == Board.DEFAULT_STATE) {
+    if(Board.getInstance().getState() != Board.ANIMATING_STATE) {
         if(algorithm != null) {
+            Board.getInstance().clearPath();
             Board.getInstance().animatePathFinding(algorithm);
         }
         else {
