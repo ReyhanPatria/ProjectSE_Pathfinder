@@ -226,6 +226,9 @@ export class Board {
         // Gets a list of visited nodes to animate
         let nodesToAnimate = this.findPath(algorithmCallback);
 
+        // Boolean to determine path is found
+        let pathFound = true;
+
         // Loop for animating visited nodes
         let animationLoop = setInterval(function() {
             // Render current node in node list
@@ -243,7 +246,8 @@ export class Board {
 
                 // Show alert when no path is found
                 if(nodesToAnimate.length <= 1) {
-                    window.alert("No path is found!");
+                    pathFound = false;
+                    window.alert("Path is not found");
                 }
 
                 // Loop for animation path nodes
@@ -260,8 +264,9 @@ export class Board {
                         // Set board state to post animation state
                         Board.getInstance().setState(Board.POST_ANIMATING_STATE);
 
-                        // Show alert when path is found
-                        window.alert("Path is found!");
+                        if(pathFound == true) {
+                            window.alert("Path is found!");
+                        }
                     }
                 }, 5);
             }
